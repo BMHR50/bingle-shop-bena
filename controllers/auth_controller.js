@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
     res_data.data = user
 
     return res.json(res_data)
-})
+})  
 
 router.post('/register', async (req, res) => {
     let user = {
