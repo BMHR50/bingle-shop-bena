@@ -1,10 +1,8 @@
-// import library
 const express = require('express')
 const bcrypt = require("bcrypt")
 
-// import use case
-const user_uc = require('../usecase/user')
 
+const user_uc = require('../usecase/user')
 const router = express.Router()
 
 router.post('/login', async (req, res) => {
@@ -16,7 +14,6 @@ router.post('/login', async (req, res) => {
         data: null
     }
 
-    // get user
     let user = await user_uc.getUserByUsername(username)
     if(user === null) {
         return res.status(400).json(res_data)
@@ -38,7 +35,7 @@ router.post('/register', async (req, res) => {
         username: req.body.username,
         is_admin: false
     }
-    let password = bcrypt.hashSync(req.body.password, 10)
+    let password = bcrypt.hashSync(req.body.password, 12)
     let res_data = {
         status: 'failed',
         message: '',
@@ -51,7 +48,7 @@ router.post('/register', async (req, res) => {
         res_data.message = 'username already exist'
         return res.status(400).json(res_data)
     }
-    // insert user data
+    
     user.password = password
     let create_res = await user_uc.createUser(user)
     if(create_res.is_success !== true) {

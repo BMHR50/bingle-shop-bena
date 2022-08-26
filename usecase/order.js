@@ -6,22 +6,33 @@ const Op = require("sequelize").Op;
 let  getPendingOrderByUserID = async (user_id) => {
     let order = null
     try {
-        order = await Order.findOne({
+        let order = await Order.findOne({
             where: {
-                user_id: user_id,
-                status: order_constants.ORDER_PENDING
-            }
-        })
+              user_id: user_id,
+              status: order_constant.ORDER_PENDING,
+            },
+            include: [
+              {
+                model: User,
+                as: 'user',
+                attributes: ['id', 'name', 'telp', 'address'],
+              },
+              {
+                model: OrderDetail,
+                as: 'order_details',
+                attributes: ['id', 'item_id', 'qty', 'total_price'],
+              },
+            ],
+          });
+
+        
     } catch (e) {
         console.log(e)
     }
     if(order === null) {
         return order
     }
-    return {
-        ...order.dataValues,
-        details: await getDetailOrder(order.id)
-    }
+   return order
 }
 let getDetailOrder = async (order_id) => {
     let details = []
