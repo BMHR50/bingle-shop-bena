@@ -10,6 +10,7 @@ const order_const = require('../internal/constants/order')
 // init router
 const router = express.Router()
 
+//done
 router.get('/:id', async (req, res) => {
   
     let id = req.params.id
@@ -21,7 +22,7 @@ router.get('/:id', async (req, res) => {
     res_data.data  = await order_uc.getPendingOrderByUserID(id)
     res.json(res_data)
 })
-
+//done
 router.post('/add/:id', async (req, res) => {
     
     let id = req.params.id
@@ -50,9 +51,9 @@ router.post('/add/:id', async (req, res) => {
 
     res.json(res_data)
 })
-
-router.patch('/submit', async (req, res) => {
-    let id = req.params
+//done
+router.patch('/submit/:id', async (req, res) => {
+    let id = req.params.id
 
     let res_data = {
         status: 'failed',

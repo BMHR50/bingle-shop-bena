@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt")
 const user_uc = require('../usecase/user')
 const router = express.Router()
 
+//done
 router.post('/login', async (req, res) => {
     let username = req.body.username
     let password = req.body.password
@@ -29,6 +30,7 @@ router.post('/login', async (req, res) => {
     return res.json(res_data)
 })  
 
+//done
 router.post('/register', async (req, res) => {
     let user = {
         name: req.body.name,

@@ -1,21 +1,21 @@
 const order_constants = require('../internal/constants/order')
 const item_uc = require('../usecase/item')
-const {Order,OrderDetail} = require('../models')
+const {Order,OrderDetail,User} = require('../models')
 const Op = require("sequelize").Op;
 
 let  getPendingOrderByUserID = async (user_id) => {
     let order = null
     try {
-        let order = await Order.findOne({
+         order = await Order.findOne({
             where: {
               user_id: user_id,
-              status: order_constant.ORDER_PENDING,
+              status: order_constants.ORDER_PENDING,
             },
             include: [
               {
                 model: User,
                 as: 'user',
-                attributes: ['id', 'name', 'telp', 'address'],
+                attributes: ['id', 'name'],
               },
               {
                 model: OrderDetail,
@@ -73,6 +73,8 @@ let addOrderDetails =  async (order_id, items) => {
         if (items[i].qty <= 0) {
             continue
         }
+    
+        console.log(items[i].id)
         let item = null
         item = await item_uc.getItemByID(items[i].id)
         if (item !== null) {
@@ -86,6 +88,7 @@ let addOrderDetails =  async (order_id, items) => {
             } catch (e) {
                 console.log(e)
             }
+            
         }
     }
 }
