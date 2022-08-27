@@ -11,6 +11,7 @@ const item_uc = require("../usecase/item")
 // init router
 const router = express.Router()
 
+//Path 1
 router.get('/', async function (req, res){
     let category = req.query['category']
     let option = null

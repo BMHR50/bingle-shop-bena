@@ -93,7 +93,7 @@ let addOrderDetails =  async (order_id, items) => {
     }
 }
 
-let changeOrderStatus = async (order_id, status) => {
+/*let changeOrderStatus = async (order_id, status) => {
     await Order.update({
         status: status
     }, {
@@ -145,7 +145,7 @@ let listCompletedOrder = async () => {
     }
 
     return orders
-}
+}*/
 
 module.exports = {
     getPendingOrderByUserID: getPendingOrderByUserID,
@@ -153,6 +153,6 @@ module.exports = {
     createOrder: createOrder,
     addOrderDetails: addOrderDetails,
     changeOrderStatus: changeOrderStatus,
-    listOrderExcludePending: listOrderExcludePending,
-    listCompletedOrder: listCompletedOrder
+    //listOrderExcludePending: listOrderExcludePending,
+    //listCompletedOrder: listCompletedOrder
 }

@@ -10,7 +10,7 @@ const order_const = require('../internal/constants/order')
 // init router
 const router = express.Router()
 
-//done
+//path 1
 router.get('/:id', async (req, res) => {
   
     let id = req.params.id
@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
     res_data.data  = await order_uc.getPendingOrderByUserID(id)
     res.json(res_data)
 })
-//done
+//path 2
 router.post('/add/:id', async (req, res) => {
     
     let id = req.params.id
