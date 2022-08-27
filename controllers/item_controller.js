@@ -28,7 +28,7 @@ router.get('/', async function (req, res){
     res.json(res_data)
 })
 
-// get item by id
+// done
 router.get('/detail/:id', async function (req, res) {
     let id = parseInt(req.params['id'])
     let res_data = {

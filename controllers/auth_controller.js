@@ -5,33 +5,10 @@ const bcrypt = require("bcrypt")
 const user_uc = require('../usecase/user')
 const router = express.Router()
 
-//done
-router.post('/login', async (req, res) => {
-    let username = req.body.username
-    let password = req.body.password
-    let res_data = {
-        status: 'failed',
-        message: 'incorrect username or password',
-        data: null
-    }
-
-    let user = await user_uc.getUserByUsername(username)
-    if(user === null) {
-        return res.status(400).json(res_data)
-    }
-    if(bcrypt.compareSync(password, user.password) !== true) {
-        return res.status(400).json(res_data)
-    }
-
-    res_data.status = 'ok'
-    res_data.message = 'success'
-    res_data.data = user
-
-    return res.json(res_data)
-})  
 
 //done
 router.post('/register', async (req, res) => {
+
     let user = {
         name: req.body.name,
         username: req.body.username,
@@ -64,5 +41,34 @@ router.post('/register', async (req, res) => {
 
     res.json(res_data)
 })
+
+
+//done
+router.post('/login', async (req, res) => {
+    let username = req.body.username
+    let password = req.body.password
+    let res_data = {
+        status: 'failed',
+        message: 'incorrect username or password',
+        data: null
+    }
+
+    let user = await user_uc.getUserByUsername(username)
+    if(user === null) {
+        return res.status(400).json(res_data)
+    }
+    if(bcrypt.compareSync(password, user.password) !== true) {
+        return res.status(400).json(res_data)
+    }
+
+    res_data.status = 'ok'
+    res_data.message = 'success'
+    res_data.data = user
+
+    return res.json(res_data)
+})  
+
+
+
 
 module.exports = router
